@@ -1,0 +1,28 @@
+# Dependencies
+frontend/node_modules/
+
+# Next.js Build Output
+frontend/.next/
+frontend/out/
+frontend/build/
+
+# Local Environment Variables
+frontend/.env*.local
+frontend/.env
+.env
+.env.local
+
+# Vercel Configuration
+frontend/.vercel/
+.vercel/
+
+# Debug Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# System Files
+.DS_Store
+Thumbs.db
