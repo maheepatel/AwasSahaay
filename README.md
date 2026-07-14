@@ -1,4 +1,4 @@
-# AwasSahaay 🏢 — Community Accountability & Tracking Platform
+# AwasSahaay 🏢  "Community Accountability & Tracking Platform"
 
 AwasSahaay is a responsive, gamified, and accountability-driven community platform designed for housing society residents, workers, and committee admins (Secretaries, Treasurers). It replaces slow, friction-filled processes with a live-updating workspace.
 
