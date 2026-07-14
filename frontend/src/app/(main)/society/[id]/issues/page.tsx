@@ -15,6 +15,7 @@ export default function IssuesPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedStatus, setSelectedStatus] = useState<string>('open'); // open, closed, all
   const [searchQuery, setSearchQuery] = useState('');
+  const [showOnlyMine, setShowOnlyMine] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -53,6 +54,9 @@ export default function IssuesPage() {
 
   // Filter issues
   const filteredIssues = issues.filter(issue => {
+    // 0. Show only mine filter
+    if (showOnlyMine && issue.raised_by !== currentUser.id) return false;
+
     // 1. Category Filter
     if (selectedCategory !== 'all' && issue.category !== selectedCategory) return false;
 
@@ -169,13 +173,26 @@ export default function IssuesPage() {
           </button>
           <button
             onClick={() => setSelectedStatus('all')}
-            className={`px-3 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wide border btn-transition ${
+            className={`px-3 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wide border btn-transition cursor-pointer ${
               selectedStatus === 'all' 
                 ? 'bg-zinc-900 border-zinc-950 text-white' 
                 : 'bg-transparent border-zinc-200 text-zinc-500 hover:bg-zinc-50'
             }`}
           >
             All Logs
+          </button>
+
+          <div className="h-6 w-[1px] bg-zinc-150 mx-1 flex-shrink-0" />
+
+          <button
+            onClick={() => setShowOnlyMine(!showOnlyMine)}
+            className={`px-3 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wide border btn-transition flex items-center gap-1 cursor-pointer ${
+              showOnlyMine 
+                ? 'bg-indigo-600 border-indigo-750 text-white shadow-xs font-black' 
+                : 'bg-transparent border-zinc-200 text-zinc-550 hover:bg-zinc-50'
+            }`}
+          >
+            <span>🙋‍♂️ My Issues</span>
           </button>
         </div>
 

@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter, usePathname } from 'next/navigation';
-import { Menu, Home, Bell, X, ShieldCheck } from 'lucide-react';
+import { Menu, Home, Bell, X, ShieldCheck, Building, MessageSquare, Trophy, User as UserIcon } from 'lucide-react';
 import { MockDb, Society, User, Membership } from '@/lib/mockDb';
 import ChannelSidebar from '@/components/ChannelSidebar';
-import PinnedAlertsStrip from '@/components/PinnedAlertsStrip';
+import ParticleBackground from '@/components/ParticleBackground';
 
 export default function SocietyLayout({ children }: { children: React.ReactNode }) {
   const params = useParams();
@@ -17,8 +17,9 @@ export default function SocietyLayout({ children }: { children: React.ReactNode 
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [myMembership, setMyMembership] = useState<Membership | null>(null);
   const [nudgeList, setNudgeList] = useState<any[]>([]);
-  const [showLeftSidebar, setShowLeftSidebar] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [presence, setPresence] = useState<'online' | 'away' | 'offline'>('online');
   const [mounted, setMounted] = useState(false);
 
   const loadData = () => {
@@ -68,10 +69,6 @@ export default function SocietyLayout({ children }: { children: React.ReactNode 
     loadData();
   };
 
-  const closeDrawers = () => {
-    setShowLeftSidebar(false);
-  };
-
   if (!mounted || !society || !currentUser) {
     return (
       <div className="flex-1 flex items-center justify-center bg-zinc-50">
@@ -84,7 +81,7 @@ export default function SocietyLayout({ children }: { children: React.ReactNode 
   }
 
   const getChannelName = () => {
-    if (pathname.includes('/admin')) return '⚙ Admin Panel';
+    if (pathname.includes('/admin')) return '⚙ Admin Console';
     if (pathname.includes('/general')) return '💬 General Chat';
     if (pathname.includes('/issues')) return '⚠ Issue Tracking';
     if (pathname.includes('/announcements')) return '📢 Announcements';
@@ -93,86 +90,259 @@ export default function SocietyLayout({ children }: { children: React.ReactNode 
     if (pathname.includes('/leaderboard')) return '🏆 Block Standings';
     if (pathname.includes('/directory')) return '👥 Members Directory';
     if (pathname.includes('/workers')) return '🛠️ Maintenance Heroes';
-    return 'General';
+    return 'Dashboard';
+  };
+
+  const mySocieties = currentUser 
+    ? MockDb.societies.filter(s => 
+        MockDb.memberships.some(m => m.user_id === currentUser.id && m.society_id === s.id)
+      )
+    : [];
+
+  const handleLogout = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('db_logged_in_user_id');
+      router.push('/login');
+    }
   };
 
   return (
-    <div className="flex-1 flex flex-col md:flex-row h-screen overflow-hidden bg-zinc-50 relative w-full">
-      {/* 1. Left Sidebar (Absolute drawer on mobile, relative permanent column on tablet/desktop) */}
-      <div className={`
-        absolute md:relative inset-y-0 left-0 z-40 transform md:transform-none transition-transform duration-300 ease-in-out flex-shrink-0 h-full
-        ${showLeftSidebar ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
-      `}>
-        <ChannelSidebar 
-          society={society} 
-          currentUser={currentUser} 
-          onClose={() => setShowLeftSidebar(false)} 
-        />
-      </div>
+    <div className="flex-1 flex flex-col h-screen overflow-hidden bg-transparent relative w-full select-none">
+      {/* Universal Particle Background */}
+      <ParticleBackground />
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 h-full relative overflow-hidden">
-        {/* Top Header Bar */}
-        <header className="sticky top-0 bg-white border-b border-zinc-100 h-14 flex items-center justify-between px-4 z-20 flex-shrink-0">
-          <div className="flex items-center gap-2.5">
-            <button 
-              onClick={() => {
-                setShowLeftSidebar(!showLeftSidebar);
-              }}
-              className="p-2 text-zinc-600 hover:text-indigo-600 hover:bg-zinc-100 rounded-lg btn-transition md:hidden"
-            >
-              <Menu className="w-5 h-5" />
-            </button>
-            <div className="flex flex-col">
-              <span className="text-[10px] font-extrabold uppercase text-zinc-400 tracking-wider">
-                {society.name}
-              </span>
-              <h2 className="text-sm font-black text-zinc-800">
-                {getChannelName()}
-              </h2>
+      {/* 1. Top Navbar (Banking / Jio App Style) */}
+      <header className="sticky top-0 bg-white/80 backdrop-blur-md border-b border-zinc-100 h-14 flex items-center justify-between px-4 z-35 flex-shrink-0 shadow-2xs">
+        
+        {/* Left side: Static profile welcome message */}
+        <div className="flex items-center gap-2.5">
+          {currentUser.avatar_url ? (
+            <img 
+              src={currentUser.avatar_url} 
+              alt={currentUser.name} 
+              className="w-8.5 h-8.5 rounded-full object-cover border border-zinc-205 shadow-3xs" 
+            />
+          ) : (
+            <div className="w-8.5 h-8.5 rounded-full bg-indigo-50 text-indigo-700 flex items-center justify-center font-bold text-xs shadow-3xs">
+              {currentUser.name.charAt(0)}
             </div>
+          )}
+          
+          <div className="leading-none text-left">
+            <div className="text-[8px] font-black text-zinc-400 uppercase tracking-widest">Hello, Resident</div>
+            <div className="text-xs font-bold text-zinc-800 mt-0.5 max-w-[125px] truncate">{currentUser.name}</div>
           </div>
+        </div>
 
-          <div className="flex items-center gap-1.5">
-            {/* Home button */}
+        {/* Center: Society Label */}
+        <div className="hidden sm:block text-center flex-1">
+          <span className="text-[9px] font-black text-indigo-600 uppercase tracking-widest bg-indigo-50 border border-indigo-100 px-2.5 py-0.5 rounded-full">
+            {society.name}
+          </span>
+        </div>
+
+        {/* Right side: Nav actions + Profile Trigger settings dropdown */}
+        <div className="flex items-center gap-1">
+          {/* Home screen redirect */}
+          <button 
+            onClick={() => router.push('/')}
+            className="p-2 text-zinc-500 hover:text-indigo-600 hover:bg-zinc-55 rounded-xl btn-transition cursor-pointer"
+            title="My Societies Screen"
+          >
+            <Home className="w-5 h-5" />
+          </button>
+
+          {/* Notification bell for nudges */}
+          <button 
+            onClick={() => setShowNotifications(true)}
+            className="p-2 text-zinc-500 hover:text-indigo-600 hover:bg-zinc-55 rounded-xl btn-transition relative cursor-pointer"
+            title="Community Nudge Inbox"
+          >
+            <Bell className="w-5 h-5" />
+            {nudgeList.length > 0 && (
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-rose-500 animate-pulse border border-white" />
+            )}
+          </button>
+
+          {/* Dedicated Profile Settings Button (lucide-react UserIcon) */}
+          <div className="relative">
             <button 
-              onClick={() => router.push('/')}
-              className="p-2 text-zinc-500 hover:text-indigo-600 hover:bg-zinc-100 rounded-lg btn-transition"
-              title="Home Screen"
+              onClick={() => setShowProfileModal(!showProfileModal)}
+              className={`p-2 rounded-xl btn-transition flex items-center justify-center cursor-pointer ${
+                showProfileModal ? 'bg-indigo-50 text-indigo-650' : 'text-zinc-500 hover:text-indigo-600 hover:bg-zinc-55'
+              }`}
+              title="Profile Settings"
             >
-              <Home className="w-4.5 h-4.5" />
+              <UserIcon className="w-5 h-5" />
             </button>
 
-            {/* Notification Bell */}
-            <button 
-              onClick={() => setShowNotifications(true)}
-              className="p-2 text-zinc-500 hover:text-indigo-600 hover:bg-zinc-100 rounded-lg btn-transition relative"
-              title="Inbox Alerts"
-            >
-              <Bell className="w-4.5 h-4.5" />
-              {nudgeList.length > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
-              )}
-            </button>
+            {/* Profile settings & swapper absolute popup panel */}
+            {showProfileModal && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setShowProfileModal(false)} />
+                <div className="absolute right-0 mt-2.5 w-60 bg-white border border-zinc-150 rounded-2xl p-4 shadow-xl z-50 animate-scale-up space-y-3.5">
+                  
+                  {/* Profile Header */}
+                  <div className="flex items-center gap-2.5 pb-2.5 border-b border-zinc-100">
+                    {currentUser.avatar_url ? (
+                      <img src={currentUser.avatar_url} alt={currentUser.name} className="w-10 h-10 rounded-full object-cover border" />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-indigo-50 text-indigo-700 flex items-center justify-center font-bold">
+                        {currentUser.name.charAt(0)}
+                      </div>
+                    )}
+                    <div className="text-left">
+                      <h4 className="text-xs font-black text-zinc-900 leading-tight">{currentUser.name}</h4>
+                      <span className="text-[9px] font-bold px-2 py-0.5 rounded-full border bg-zinc-50 capitalize text-zinc-500 mt-1 inline-block">
+                        {myMembership?.role || 'Resident'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Presence Status Toggle */}
+                  <div className="space-y-1 text-left">
+                    <label className="block text-[8px] font-black uppercase text-zinc-400 tracking-wider">Presence Status</label>
+                    <div className="flex items-center gap-2 bg-zinc-50 p-1.5 rounded-lg border border-zinc-100">
+                      <div className={`w-2 h-2 rounded-full ${
+                        presence === 'online' ? 'bg-emerald-500 animate-pulse' :
+                        presence === 'away' ? 'bg-amber-500' : 'bg-zinc-400'
+                      }`} />
+                      <span className="text-[10px] font-bold text-zinc-700 capitalize flex-1">
+                        {presence}
+                      </span>
+                      <select
+                        value={presence}
+                        onChange={(e) => setPresence(e.target.value as any)}
+                        className="bg-transparent text-[10px] font-bold text-zinc-500 focus:outline-none cursor-pointer"
+                      >
+                        <option value="online">Online</option>
+                        <option value="away">Away</option>
+                        <option value="offline">Offline</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Switch Perspective Select dropdown */}
+                  <div className="space-y-1 text-left">
+                    <label className="block text-[8px] font-black uppercase text-zinc-400 tracking-wider">Switch Perspective</label>
+                    <select
+                      value={currentUser.id}
+                      onChange={(e) => {
+                        MockDb.setActiveUser(e.target.value);
+                        window.location.reload();
+                      }}
+                      className="w-full text-xs font-bold border border-zinc-200 rounded-lg p-2 bg-zinc-50 text-zinc-700 focus:outline-none cursor-pointer"
+                    >
+                      {MockDb.users.map(u => {
+                        const mem = MockDb.getUserMembership(u.id, id);
+                        if (!mem) return null;
+                        return (
+                          <option key={u.id} value={u.id}>
+                            {u.name} ({mem.role === 'secretary' ? 'Secretary' : mem.role === 'worker' ? 'Hero' : 'Resident'})
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+
+                  {/* Switch Society Select dropdown (Only visible if user has > 1 society) */}
+                  {mySocieties.length > 1 && (
+                    <div className="space-y-1 text-left">
+                      <label className="block text-[8px] font-black uppercase text-zinc-400 tracking-wider">Switch Society / Apartment</label>
+                      <select
+                        value={id}
+                        onChange={(e) => {
+                          setShowProfileModal(false);
+                          router.push(`/society/${e.target.value}`);
+                        }}
+                        className="w-full text-xs font-bold border border-zinc-200 rounded-lg p-2 bg-zinc-50 text-zinc-700 focus:outline-none cursor-pointer"
+                      >
+                        {mySocieties.map(s => (
+                          <option key={s.id} value={s.id}>
+                            {s.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+
+                  <button
+                    onClick={() => {
+                      if (confirm("Reset local database to default seed values? This will reset all stats.")) {
+                        localStorage.clear();
+                        window.location.reload();
+                      }
+                    }}
+                    className="w-full text-center text-[9px] font-black uppercase tracking-wider text-rose-500 bg-rose-50 hover:bg-rose-100/50 py-2 rounded-xl border border-rose-100 transition cursor-pointer"
+                  >
+                    Reset Database State
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem('db_logged_in_user_id');
+                      window.location.reload();
+                    }}
+                    className="w-full text-center text-[9px] font-black uppercase tracking-wider text-zinc-500 bg-zinc-50 hover:bg-zinc-150 py-2 rounded-xl border border-zinc-100 transition cursor-pointer"
+                  >
+                    Log Out
+                  </button>
+                </div>
+              </>
+            )}
           </div>
-        </header>
+        </div>
+      </header>
 
-        {/* 2. Pinned Alerts Strip */}
-        <PinnedAlertsStrip 
-          societyId={society.id} 
-          currentUser={currentUser} 
-          onAlertResolved={() => {
-            router.refresh();
-          }}
-        />
+      {/* 3. Main Outlet Container */}
+      <main className="flex-1 w-full min-w-0 overflow-y-auto relative bg-transparent pb-20">
+        {children}
+      </main>
 
-        {/* Channel Router Outlet children */}
-        <main className="flex-1 w-full min-w-0 overflow-y-auto relative bg-zinc-50">
-          {children}
-        </main>
-      </div>
+      {/* 4. Bottom Tab Bar Navigation */}
+      <nav className="fixed bottom-0 inset-x-0 h-16 bg-white border-t border-zinc-100 z-30 flex items-center justify-around px-4 shadow-[0_-3px_15px_rgba(0,0,0,0.03)] pb-safe">
+        {[
+          { 
+            label: 'Home', 
+            icon: <Building className="w-5 h-5" />, 
+            path: `/society/${id}`,
+            active: pathname === `/society/${id}`
+          },
+          { 
+            label: 'Chat', 
+            icon: <MessageSquare className="w-5 h-5" />, 
+            path: `/society/${id}/general`,
+            active: pathname.includes('/general')
+          },
+          { 
+            label: 'Complaints', 
+            icon: <ShieldCheck className="w-5 h-5" />, 
+            path: `/society/${id}/issues`,
+            active: pathname.includes('/issues')
+          },
+          { 
+            label: 'Standings', 
+            icon: <Trophy className="w-5 h-5" />, 
+            path: `/society/${id}/leaderboard`,
+            active: pathname.includes('/leaderboard')
+          }
+        ].map((tab, idx) => (
+          <button
+            key={idx}
+            onClick={() => router.push(tab.path)}
+            className={`flex flex-col items-center justify-center flex-1 h-full py-1.5 transition-all gap-1 cursor-pointer ${
+              tab.active 
+                ? 'text-indigo-600 font-extrabold scale-105' 
+                : 'text-zinc-400 font-bold hover:text-zinc-600'
+            }`}
+          >
+            {tab.icon}
+            <span className="text-[9px] uppercase tracking-wider">{tab.label}</span>
+          </button>
+        ))}
+      </nav>
 
-      {/* 3. Notification Inbox Sheet Drawer Overlay */}
+      {/* 5. Notification Inbox Drawer */}
       {showNotifications && (
         <div className="absolute inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-3xl w-full max-w-xs p-5 shadow-xl border border-zinc-100 flex flex-col relative animate-scale-up space-y-4">
@@ -247,13 +417,6 @@ export default function SocietyLayout({ children }: { children: React.ReactNode 
         </div>
       )}
 
-      {/* Backdrop overlay */}
-      {showLeftSidebar && (
-        <div 
-          onClick={closeDrawers}
-          className="absolute inset-0 bg-black/30 z-30 transition-opacity duration-300"
-        />
-      )}
     </div>
   );
 }

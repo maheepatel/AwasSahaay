@@ -133,7 +133,7 @@ export default function GeneralPage() {
       {/* Messages Scroll Area */}
       <div 
         ref={scrollRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4 pb-24 no-scrollbar"
+        className="flex-1 overflow-y-auto p-4 space-y-4 pb-36 no-scrollbar"
       >
         {messages.map((msg) => {
           const sender = MockDb.users.find(u => u.id === msg.sender_id);
@@ -182,10 +182,10 @@ export default function GeneralPage() {
         })}
       </div>
 
-      {/* Floating Bottom Input Bar */}
+      {/* Floating Bottom Input Bar - shifted bottom-16 to avoid tab bar overlap */}
       <form 
         onSubmit={handleSendMessage}
-        className="absolute bottom-0 inset-x-0 p-4 bg-white border-t border-zinc-100 flex gap-2.5 items-center z-10 shadow-md"
+        className="absolute bottom-16 inset-x-0 p-4 bg-white border-t border-zinc-100 flex gap-2.5 items-center z-20 shadow-md"
       >
         <input
           type="text"
