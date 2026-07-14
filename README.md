@@ -1,6 +1,6 @@
-# AwasSahaay 🏢 — Community Accountability & Tracking Platform
+# AwasSahaay 🏢  "Community Accountability & Tracking Platform"
 
-AwasSahaay is a responsive, gamified, and accountability-driven community platform designed for housing society residents, workers, and committee admins (Secretaries, Treasurers). It replaces slow, friction-filled processes with a live-updating workspace.
+AwasSahaay is a responsive, gamified, and accountability driven community platform designed for housing society residents, workers, and committee admins (Secretaries, Treasurers). It replaces slow, friction-filled processes with a live updating workspace.
 
 ---
 
@@ -20,14 +20,14 @@ AwasSahaay is a responsive, gamified, and accountability-driven community platfo
 * **Original Raiser Verification**: Closed tickets are reviewed by the raiser to verify satisfaction or dispute/reopen.
 
 ### 3. 🏆 Wing/Block Wars Leaderboard
-* Dynamic, wing-level standings calculated by:
+* Dynamic, wing level standings calculated by:
   * Maintenance payment rates (50% weight).
   * SLA complaint resolution speed (30% weight).
   * Neighbor Vibe Score (20% weight).
-* Drives cooperative accountability—top blocks receive rewards like clubhouse discount rates.
+* Drives cooperative accountability top blocks receive rewards like clubhouse discount rates.
 
 ### 4. 🚗 Anonymous Neighbor Nudges
-* Allows dispatching template-based alerts (Noise 🎵, Parking 🚗, Pets 🐕, Litter 🧹) anonymously.
+* Allows dispatching template based alerts (Noise 🎵, Parking 🚗, Pets 🐕, Litter 🧹) anonymously.
 * Resolving a nudge with an apology restores the target flat's **Vibe Score**, while receiving a nudge decreases it.
 
 ### 5. 🛠️ Maintenance Heroes & Gratitude Tipping
@@ -96,54 +96,6 @@ To connect the application to a live database:
 
 ---
 
-## 🚀 Step-by-Step GitHub & Vercel Deployment Guide
 
-### Part 1: Pushing the Project to GitHub
 
-1. **Create a new Repository on GitHub**:
-   * Name: `AwasSahaay`
-   * Description: `A responsive, gamified, and accountability-driven community platform and Wing standings helpdesk for housing societies.`
-   * Visibility: Public (or Private).
 
-2. **Initialize Git Locally** (in the root `Society App/` folder):
-   ```bash
-   # Navigate to your root folder
-   cd "Society App"
-   
-   # Initialize Git
-   git init
-   
-   # Add all files to staging
-   git add .
-   
-   # Commit local changes
-   git commit -m "feat: initial commit of AwasSahaay gamified community platform"
-   ```
-
-3. **Link Local Repository to GitHub & Push**:
-   ```bash
-   # Set default branch to main
-   git branch -M main
-   
-   # Add your GitHub remote URL
-   git remote add origin https://github.com/your-username/AwasSahaay.git
-   
-   # Push your code to main branch
-   git push -u origin main
-   ```
-
----
-
-### Part 2: Hosting on Vercel
-
-1. Log in to [Vercel](https://vercel.com/) and click **"Add New"** > **"Project"**.
-2. Import your **`AwasSahaay`** repository from GitHub.
-3. In the Configuration Settings:
-   * **Root Directory**: Click "Edit" and select **`frontend`** (this is vital since Next.js resides inside the subfolder).
-   * **Framework Preset**: Detects automatically as **Next.js**.
-   * **Build Command**: `next build`
-   * **Output Directory**: `.next`
-4. Expand **"Environment Variables"** and add:
-   * `NEXT_PUBLIC_SUPABASE_URL` = *(Your Supabase URL)*
-   * `NEXT_PUBLIC_SUPABASE_ANON_KEY` = *(Your Supabase Anon Key)*
-5. Click **"Deploy"**. Vercel will host your Next.js frontend in under a minute!

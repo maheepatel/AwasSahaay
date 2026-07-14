@@ -1,4 +1,4 @@
-# [Society App] — Master Build Document
+# [Society App] Master Build Document
 **Verified society issue-tracking & accountability platform, built like the apps people already use**
 
 ---
