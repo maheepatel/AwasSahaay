@@ -129,11 +129,11 @@ export default function GeneralPage() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-3.5rem)] relative bg-zinc-50">
+    <div className="absolute inset-0 flex flex-col overflow-hidden bg-zinc-50">
       {/* Messages Scroll Area */}
       <div 
         ref={scrollRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4 pb-28 no-scrollbar"
+        className="flex-1 overflow-y-auto p-4 space-y-4 pb-24 no-scrollbar"
       >
         {messages.map((msg) => {
           const sender = MockDb.users.find(u => u.id === msg.sender_id);

@@ -62,7 +62,11 @@ export default function PinnedAlertsStrip({ societyId, currentUser, onAlertResol
   };
 
   return (
-    <div className="w-full bg-white border-b border-zinc-100 transition-all duration-300">
+    <div className={`w-full transition-all duration-300 ${
+      isExpanded 
+        ? 'bg-zinc-100 border-b border-zinc-300 shadow-sm relative z-20' 
+        : 'bg-white border-b border-zinc-100'
+    }`}>
       {/* Top Banner strip (collapsed view) */}
       {!isExpanded ? (
         <div 
@@ -82,7 +86,7 @@ export default function PinnedAlertsStrip({ societyId, currentUser, onAlertResol
         </div>
       ) : (
         /* Expanded list view */
-        <div className="p-4 bg-zinc-50 max-h-72 overflow-y-auto space-y-3">
+        <div className="p-4 bg-zinc-50 border-t border-zinc-200 max-h-72 overflow-y-auto space-y-3">
           <div className="flex justify-between items-center pb-2 border-b border-zinc-200">
             <h4 className="text-xs font-extrabold text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
               Pinned Community Alerts ({sortedAlerts.length})

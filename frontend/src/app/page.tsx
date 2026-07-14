@@ -77,12 +77,12 @@ export default function HomePage() {
             )}
             <div>
               <div className="text-xs text-zinc-400 font-semibold tracking-wide uppercase">Welcome back</div>
-              <h1 className="text-base font-bold text-zinc-800 flex items-center gap-1">
+              <h1 className="text-sm sm:text-base font-bold text-zinc-800 flex items-center gap-1 truncate max-w-[100px] xs:max-w-[130px] sm:max-w-none" title={currentUser.name}>
                 {currentUser.name}
               </h1>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 flex-shrink-0">
             {/* User profile switcher for local validation flow */}
             <select
               value={currentUser.id}
@@ -90,7 +90,7 @@ export default function HomePage() {
                 MockDb.setActiveUser(e.target.value);
                 window.location.reload();
               }}
-              className="text-[10px] font-bold border border-zinc-200 rounded-lg p-1.5 bg-zinc-50 text-zinc-700 focus:outline-none"
+              className="text-[9px] sm:text-[10px] font-bold border border-zinc-200 rounded-lg p-1.5 bg-zinc-50 text-zinc-700 focus:outline-none max-w-[100px] xs:max-w-[135px] sm:max-w-none truncate"
               title="Switch Active Profile"
             >
               {MockDb.users.map(u => {

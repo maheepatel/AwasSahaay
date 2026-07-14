@@ -73,9 +73,17 @@ export default function WorkersPage() {
             className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 cursor-pointer btn-transition"
           >
             <div className="flex items-center gap-3.5 min-w-0">
-              <div className="w-10 h-10 rounded-xl bg-linear-to-br from-sky-50 to-indigo-50/30 border border-sky-100 flex items-center justify-center font-black text-sky-700 flex-shrink-0">
-                {worker.name.charAt(0)}
-              </div>
+              {worker.userRaw?.avatar_url ? (
+                <img 
+                  src={worker.userRaw.avatar_url} 
+                  alt={worker.name} 
+                  className="w-10 h-10 rounded-xl object-cover border border-zinc-150 flex-shrink-0 shadow-3xs"
+                />
+              ) : (
+                <div className="w-10 h-10 rounded-xl bg-linear-to-br from-sky-50 to-indigo-50/30 border border-sky-100 flex items-center justify-center font-black text-sky-700 flex-shrink-0">
+                  {worker.name.charAt(0)}
+                </div>
+              )}
               <div className="min-w-0">
                 <h4 className="text-xs font-bold text-zinc-800 truncate">{worker.name}</h4>
                 <p className="text-[10px] text-indigo-600 font-bold tracking-wide uppercase mt-0.5">
