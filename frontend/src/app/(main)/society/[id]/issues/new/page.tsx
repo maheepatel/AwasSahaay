@@ -199,10 +199,10 @@ export default function RaiseIssuePage() {
                 key={cat}
                 type="button"
                 onClick={() => setCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold border capitalize btn-transition ${
+                className={`px-4 py-2.5 rounded-xl text-[10px] sm:text-xs md:text-sm font-black border capitalize btn-transition whitespace-nowrap ${
                   category === cat
                     ? 'bg-indigo-600 border-indigo-700 text-white shadow-sm font-extrabold'
-                    : 'bg-white border-zinc-200 text-zinc-600 hover:bg-zinc-50'
+                    : 'bg-white border-zinc-200 text-zinc-650 hover:bg-zinc-50'
                 }`}
               >
                 {cat}
@@ -349,7 +349,7 @@ export default function RaiseIssuePage() {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 btn-transition shadow-md shadow-indigo-100 mt-8"
+          className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 text-white font-black rounded-xl text-[11px] sm:text-xs md:text-sm uppercase tracking-wider flex items-center justify-center gap-2 btn-transition shadow-sm mt-8 whitespace-nowrap"
           disabled={submitting || uploading}
         >
           {submitting ? 'Submitting Complaint...' : 'File Complaint'}

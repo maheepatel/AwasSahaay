@@ -126,7 +126,7 @@ export default function AnnouncementsPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 btn-transition shadow-md shadow-indigo-100"
+            className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 btn-transition shadow-sm whitespace-nowrap"
           >
             <span>Publish Broadcast</span>
             <Send className="w-3.5 h-3.5" />

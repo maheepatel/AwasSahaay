@@ -344,7 +344,7 @@ export default function IssueDetailPage() {
               <button
                 onClick={handleAssign}
                 disabled={actionLoading || !selectedAssignee}
-                className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 btn-transition"
+                className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 text-white font-black rounded-xl text-[11px] sm:text-xs md:text-sm uppercase tracking-wider flex items-center justify-center gap-2 btn-transition whitespace-nowrap"
               >
                 <UserCheck className="w-4 h-4" />
                 <span>Assign Issue</span>
@@ -361,7 +361,7 @@ export default function IssueDetailPage() {
               <button
                 onClick={handleStartFixing}
                 disabled={actionLoading}
-                className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 btn-transition"
+                className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 text-white font-black rounded-xl text-[11px] sm:text-xs md:text-sm uppercase tracking-wider flex items-center justify-center gap-2 btn-transition whitespace-nowrap"
               >
                 <Play className="w-4 h-4" />
                 <span>Start Fixing</span>
@@ -429,7 +429,7 @@ export default function IssueDetailPage() {
               <button
                 type="submit"
                 disabled={actionLoading || uploading || proofPhotos.length === 0}
-                className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:bg-zinc-300 text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 btn-transition shadow-xs"
+                className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 disabled:bg-zinc-300 text-white font-black rounded-xl text-[11px] sm:text-xs md:text-sm uppercase tracking-wider flex items-center justify-center gap-2 btn-transition shadow-xs whitespace-nowrap"
               >
                 <CheckCircle className="w-4 h-4" />
                 <span>Mark Resolution Complete</span>
@@ -474,7 +474,7 @@ export default function IssueDetailPage() {
                   {isRaiser && issue.assigned_to && (
                     <div className="space-y-2">
                       <label className="block text-[10px] font-bold uppercase text-zinc-400">Send a cup of chai (Tip Worker) ☕</label>
-                      <div className="flex gap-1.5">
+                      <div className="flex flex-wrap gap-2">
                         {[
                           { val: 0, label: 'No Tip' },
                           { val: 10, label: '₹10 ☕' },
@@ -485,7 +485,7 @@ export default function IssueDetailPage() {
                             key={tip.val}
                             type="button"
                             onClick={() => setTipAmount(tip.val)}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-bold border btn-transition ${
+                            className={`px-4 py-2.5 rounded-xl text-[10px] sm:text-xs md:text-sm font-black border btn-transition whitespace-nowrap cursor-pointer ${
                               tipAmount === tip.val
                                 ? 'bg-indigo-600 border-indigo-700 text-white font-extrabold shadow-2xs'
                                 : 'bg-zinc-50 border-zinc-200 text-zinc-500 hover:bg-zinc-100'
@@ -501,7 +501,7 @@ export default function IssueDetailPage() {
                   <button
                     onClick={handleVerifyClose}
                     disabled={actionLoading}
-                    className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:bg-zinc-300 text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 btn-transition shadow-xs"
+                    className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 disabled:bg-zinc-300 text-white font-black rounded-xl text-[11px] sm:text-xs md:text-sm uppercase tracking-wider flex items-center justify-center gap-2 btn-transition shadow-xs whitespace-nowrap"
                   >
                     <CheckCircle className="w-4 h-4" />
                     <span>{tipAmount > 0 ? `Verify & Pay ₹${tipAmount}` : 'Verify & Close Ticket'}</span>
@@ -527,7 +527,7 @@ export default function IssueDetailPage() {
                   <button
                     type="submit"
                     disabled={actionLoading}
-                    className="w-full py-2.5 bg-rose-600 hover:bg-rose-700 disabled:bg-zinc-300 text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 btn-transition"
+                    className="w-full py-3 bg-rose-600 hover:bg-rose-700 disabled:bg-zinc-300 text-white font-black rounded-xl text-[11px] sm:text-xs md:text-sm uppercase tracking-wider flex items-center justify-center gap-2 btn-transition whitespace-nowrap"
                   >
                     <RotateCcw className="w-4 h-4" />
                     <span>Dispute & Reopen Issue</span>

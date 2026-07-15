@@ -66,7 +66,7 @@ export default function HomePage() {
                 <span className="text-xs font-bold text-zinc-300">{currentUser.name}</span>
                 <button 
                   onClick={handleLogout}
-                  className="px-3 py-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold text-[10px] uppercase tracking-wider rounded-xl transition cursor-pointer"
+                  className="px-3.5 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-black text-[9.5px] sm:text-[10.5px] md:text-xs uppercase tracking-wider rounded-xl transition cursor-pointer whitespace-nowrap"
                 >
                   Sign Out
                 </button>
@@ -74,7 +74,7 @@ export default function HomePage() {
             ) : (
               <button
                 onClick={() => router.push('/login')}
-                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider shadow-md shadow-indigo-950 cursor-pointer transition-all"
+                className="px-4.5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl text-[11px] sm:text-xs md:text-sm uppercase tracking-wider shadow-md shadow-indigo-950 cursor-pointer transition-all whitespace-nowrap"
               >
                 Sign In
               </button>
@@ -152,7 +152,7 @@ export default function HomePage() {
                       {soc.name}
                     </h4>
                     <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-wide mt-1.5 flex items-center gap-1">
-                      <MapPin className="w-3 h-3 text-zinc-650" />
+                      <MapPin className="w-3 h-3 text-zinc-500" />
                       <span>{soc.address}, {soc.city}</span>
                     </span>
                   </div>

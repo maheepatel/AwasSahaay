@@ -242,7 +242,7 @@ export default function DirectoryPage() {
               {selectedMembership.role !== 'worker' && selectedMember.id !== currentUser.id && (
                 <button
                   onClick={() => setShowNudgeSheet(true)}
-                  className="w-full mt-4 py-2 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-xl text-[10px] uppercase tracking-wider flex items-center justify-center gap-1.5 btn-transition shadow-xs"
+                  className="w-full mt-4 py-2.5 bg-rose-500 hover:bg-rose-600 text-white font-black rounded-xl text-[10px] sm:text-xs md:text-sm uppercase tracking-wider flex items-center justify-center gap-1.5 btn-transition shadow-xs whitespace-nowrap"
                 >
                   <Shield className="w-3.5 h-3.5" />
                   <span>Nudge Neighbor Flat</span>
@@ -277,7 +277,7 @@ export default function DirectoryPage() {
                         key={item.cat}
                         type="button"
                         onClick={() => setNudgeCategory(item.cat as any)}
-                        className={`py-2 text-[10px] font-extrabold uppercase tracking-wide border rounded-xl btn-transition ${
+                        className={`py-2.5 text-[10px] sm:text-xs md:text-sm font-black uppercase tracking-wide border rounded-xl btn-transition whitespace-nowrap ${
                           nudgeCategory === item.cat
                             ? 'bg-rose-50 border-rose-200 text-rose-700 shadow-2xs'
                             : 'bg-zinc-50 border-zinc-200 text-zinc-500 hover:bg-zinc-100'
@@ -300,16 +300,16 @@ export default function DirectoryPage() {
                   />
                 </div>
 
-                <div className="flex gap-2 pt-2">
+                <div className="flex gap-2.5 pt-2">
                   <button
                     onClick={() => setShowNudgeSheet(false)}
-                    className="flex-1 py-2 border border-zinc-200 hover:bg-zinc-50 text-zinc-500 text-[10px] font-bold uppercase rounded-lg transition"
+                    className="flex-1 py-2.5 border border-zinc-200 hover:bg-zinc-50 text-zinc-500 text-[10px] sm:text-xs md:text-sm font-black uppercase rounded-xl transition whitespace-nowrap"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleSendNudge}
-                    className="flex-1 py-2 bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-bold uppercase rounded-lg transition shadow-sm"
+                    className="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white text-[10px] sm:text-xs md:text-sm font-black uppercase rounded-xl transition shadow-xs whitespace-nowrap"
                   >
                     Send Nudge
                   </button>

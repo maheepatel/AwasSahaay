@@ -169,7 +169,7 @@ export default function SocietyLayout({ children }: { children: React.ReactNode 
             <button 
               onClick={() => setShowProfileModal(!showProfileModal)}
               className={`p-2 rounded-xl btn-transition flex items-center justify-center cursor-pointer ${
-                showProfileModal ? 'bg-indigo-50 text-indigo-650' : 'text-zinc-500 hover:text-indigo-600 hover:bg-zinc-55'
+                showProfileModal ? 'bg-indigo-50 text-indigo-600' : 'text-zinc-500 hover:text-indigo-600 hover:bg-zinc-50'
               }`}
               title="Profile Settings"
             >
@@ -299,30 +299,30 @@ export default function SocietyLayout({ children }: { children: React.ReactNode 
         {children}
       </main>
 
-      {/* 4. Bottom Tab Bar Navigation */}
-      <nav className="fixed bottom-0 inset-x-0 h-16 bg-white border-t border-zinc-100 z-30 flex items-center justify-around px-4 shadow-[0_-3px_15px_rgba(0,0,0,0.03)] pb-safe">
+      {/* 4. Bottom Floating Tab Bar Navigation (Sleek curved App-style) */}
+      <nav className="fixed bottom-[5px] left-[5px] right-[5px] md:left-1/2 md:right-auto md:-translate-x-1/2 md:w-[480px] h-13.5 bg-white/90 backdrop-blur-md border border-zinc-200/80 z-35 flex items-center justify-around px-2.5 shadow-md rounded-2xl select-none">
         {[
           { 
             label: 'Home', 
-            icon: <Building className="w-5 h-5" />, 
+            icon: <Building className="w-4.5 h-4.5" />, 
             path: `/society/${id}`,
             active: pathname === `/society/${id}`
           },
           { 
             label: 'Chat', 
-            icon: <MessageSquare className="w-5 h-5" />, 
+            icon: <MessageSquare className="w-4.5 h-4.5" />, 
             path: `/society/${id}/general`,
             active: pathname.includes('/general')
           },
           { 
             label: 'Complaints', 
-            icon: <ShieldCheck className="w-5 h-5" />, 
+            icon: <ShieldCheck className="w-4.5 h-4.5" />, 
             path: `/society/${id}/issues`,
             active: pathname.includes('/issues')
           },
           { 
             label: 'Standings', 
-            icon: <Trophy className="w-5 h-5" />, 
+            icon: <Trophy className="w-4.5 h-4.5" />, 
             path: `/society/${id}/leaderboard`,
             active: pathname.includes('/leaderboard')
           }
@@ -330,14 +330,14 @@ export default function SocietyLayout({ children }: { children: React.ReactNode 
           <button
             key={idx}
             onClick={() => router.push(tab.path)}
-            className={`flex flex-col items-center justify-center flex-1 h-full py-1.5 transition-all gap-1 cursor-pointer ${
+            className={`flex flex-col items-center justify-center flex-1 h-full py-1 transition-all gap-0.5 cursor-pointer pointer-events-auto ${
               tab.active 
-                ? 'text-indigo-600 font-extrabold scale-105' 
-                : 'text-zinc-400 font-bold hover:text-zinc-600'
+                ? 'text-indigo-400 font-extrabold scale-105' 
+                : 'text-zinc-400 font-bold hover:text-zinc-300'
             }`}
           >
             {tab.icon}
-            <span className="text-[9px] uppercase tracking-wider">{tab.label}</span>
+            <span className="text-[8px] xs:text-[9px] sm:text-[10px] font-black uppercase tracking-wider mt-0.5">{tab.label}</span>
           </button>
         ))}
       </nav>

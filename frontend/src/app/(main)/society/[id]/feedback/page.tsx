@@ -130,9 +130,9 @@ export default function FeedbackPage() {
                 key={tag}
                 type="button"
                 onClick={() => setCategory(tag)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold border btn-transition ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-black border btn-transition whitespace-nowrap ${
                   category === tag
-                    ? 'bg-indigo-600 border-indigo-700 text-white font-extrabold shadow-2xs'
+                    ? 'bg-indigo-600 border-indigo-700 text-white shadow-2xs'
                     : 'bg-zinc-50 border-zinc-200 text-zinc-500 hover:bg-zinc-100'
                 }`}
               >
@@ -173,21 +173,23 @@ export default function FeedbackPage() {
           const membership = MockDb.getUserMembership(item.posted_by, societyId);
 
           return (
-            <div key={item.id} className="bg-white border border-zinc-100 rounded-2xl p-4 shadow-2xs space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-[9px] font-bold px-2 py-0.5 rounded-full border bg-zinc-50 border-zinc-200 text-zinc-600 uppercase tracking-wide">
-                  {item.category}
-                </span>
-                <span className="text-[9px] text-zinc-400 font-bold uppercase">
-                  {new Date(item.created_at).toLocaleDateString([], {month:'short', day:'numeric'})}
-                </span>
+            <div key={item.id} className="bg-white border border-zinc-100 rounded-2xl p-4 shadow-2xs space-y-2.5 flex flex-col justify-between">
+              <div>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-[8.5px] sm:text-[10px] md:text-xs font-black px-2 py-0.5 rounded-full border bg-zinc-50 border-zinc-200 text-zinc-600 uppercase tracking-wide">
+                    {item.category}
+                  </span>
+                  <span className="text-[8.5px] sm:text-[10px] md:text-xs text-zinc-400 font-bold uppercase">
+                    {new Date(item.created_at).toLocaleDateString([], {month:'short', day:'numeric'})}
+                  </span>
+                </div>
+
+                <p className="text-[11px] sm:text-[13px] md:text-sm font-semibold text-zinc-700 leading-relaxed break-words">
+                  "{item.comment}"
+                </p>
               </div>
 
-              <p className="text-xs font-semibold text-zinc-700 leading-relaxed break-words">
-                "{item.comment}"
-              </p>
-
-              <div className="text-[10px] text-zinc-400 font-bold border-t border-zinc-50 pt-2.5 flex justify-between items-center mt-1">
+              <div className="text-[9.5px] sm:text-[11px] md:text-xs text-zinc-400 font-bold border-t border-zinc-50 pt-2.5 flex justify-between items-center mt-1">
                 <div>
                   <span>By {poster?.name || 'Resident'}</span>
                   <span> ({membership?.flat_number || 'Visitor'})</span>
@@ -195,7 +197,7 @@ export default function FeedbackPage() {
                 
                 <button
                   onClick={() => handleToggleReact(item.id)}
-                  className={`flex items-center gap-1 px-1.5 py-0.5 rounded-md border font-extrabold text-[9px] uppercase tracking-wider btn-transition ${
+                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-xl border font-black text-[9px] sm:text-[10px] md:text-xs uppercase tracking-wider btn-transition whitespace-nowrap cursor-pointer ${
                     item.reacts?.includes(currentUser.id)
                       ? 'bg-indigo-50 border-indigo-200 text-indigo-700'
                       : 'bg-zinc-50 border-zinc-200 text-zinc-500 hover:bg-zinc-100'

@@ -129,11 +129,11 @@ export default function GeneralPage() {
   };
 
   return (
-    <div className="absolute inset-0 flex flex-col overflow-hidden bg-zinc-50">
+    <div className="h-[calc(100vh-3.5rem)] flex flex-col bg-zinc-50 pb-[76px] overflow-hidden relative">
       {/* Messages Scroll Area */}
       <div 
         ref={scrollRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4 pb-36 no-scrollbar"
+        className="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar"
       >
         {messages.map((msg) => {
           const sender = MockDb.users.find(u => u.id === msg.sender_id);
@@ -182,24 +182,24 @@ export default function GeneralPage() {
         })}
       </div>
 
-      {/* Floating Bottom Input Bar - shifted bottom-16 to avoid tab bar overlap */}
+      {/* Floating Bottom Input Bar - premium curved pill with outer margins */}
       <form 
         onSubmit={handleSendMessage}
-        className="absolute bottom-16 inset-x-0 p-4 bg-white border-t border-zinc-100 flex gap-2.5 items-center z-20 shadow-md"
+        className="mx-3.5 mb-3 p-2 bg-white/90 border border-zinc-200/80 backdrop-blur-md flex gap-2 items-center shadow-md rounded-2xl flex-shrink-0"
       >
         <input
           type="text"
           placeholder="Send a message in #general..."
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          className="flex-1 px-4 py-2.5 border border-zinc-200 rounded-xl text-xs font-semibold text-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-zinc-50 focus:bg-white"
+          className="flex-1 px-4 py-2.5 border border-zinc-200/50 rounded-xl text-xs font-semibold text-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-zinc-50/50 focus:bg-white"
         />
         <button
           type="submit"
-          className="p-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl flex items-center justify-center transition hover:scale-105 active:scale-95 shadow-sm"
+          className="p-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm whitespace-nowrap"
           title="Send message"
         >
-          <Send className="w-4 h-4" />
+          <Send className="w-4.5 h-4.5 text-white" />
         </button>
       </form>
     </div>

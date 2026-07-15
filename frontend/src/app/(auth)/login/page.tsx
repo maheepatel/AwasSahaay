@@ -171,7 +171,7 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 btn-transition shadow-sm cursor-pointer"
+              className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 text-white font-black rounded-xl text-[11px] sm:text-xs md:text-sm flex items-center justify-center gap-2 btn-transition shadow-sm cursor-pointer whitespace-nowrap"
               disabled={loading}
             >
               {loading ? 'Authenticating...' : 'Sign In'}

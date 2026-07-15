@@ -72,7 +72,7 @@ export default function AmbientBackground() {
           // Fade lines as they get closer to the edge or camera depth
           const opacity = Math.max(0, Math.min(0.09, (rows - r) / (rows * 6)));
 
-          ctx.strokeStyle = `rgba(99, 102, 241, ${opacity})`;
+          ctx.strokeStyle = `rgba(148, 163, 184, ${opacity * 1.8})`;
           ctx.lineWidth = 0.5;
 
           // Draw horizontal line to next column
@@ -95,13 +95,13 @@ export default function AmbientBackground() {
         }
       }
 
-      // 3. Draw drifting ambient nebula orbs behind the grid
+      // 3. Draw drifting ambient nebula orbs behind the grid (Light theme)
       const gradient = ctx.createRadialGradient(
         width * 0.5, height * 0.35, 10,
         width * 0.5, height * 0.35, Math.max(200, width * 0.45)
       );
-      gradient.addColorStop(0, 'rgba(15, 23, 42, 0.4)');
-      gradient.addColorStop(0.5, 'rgba(30, 27, 75, 0.15)');
+      gradient.addColorStop(0, 'rgba(238, 242, 255, 0.4)'); // Very soft light blue/indigo glow
+      gradient.addColorStop(0.5, 'rgba(243, 244, 246, 0.2)');
       gradient.addColorStop(1, 'transparent');
       
       ctx.fillStyle = gradient;
@@ -122,7 +122,7 @@ export default function AmbientBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none -z-20 bg-[#04060a]"
+      className="absolute inset-0 w-full h-full pointer-events-none -z-20 bg-gradient-to-br from-[#f8fafc] via-[#ffffff] to-[#f1f5f9]"
     />
   );
 }

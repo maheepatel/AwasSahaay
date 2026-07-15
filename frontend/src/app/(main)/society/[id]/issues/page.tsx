@@ -149,47 +149,47 @@ export default function IssuesPage() {
           <Search className="absolute left-3 top-2.5 w-4 h-4 text-zinc-400" />
         </div>
 
-        {/* Status filters toggles */}
-        <div className="flex gap-1.5 border-b border-zinc-100 pb-2.5">
+        {/* Status filters toggles (Horizontally scrollable to prevent congestion) */}
+        <div className="flex gap-2 border-b border-zinc-100 pb-2.5 overflow-x-auto no-scrollbar whitespace-nowrap scroll-smooth select-none w-full">
           <button
             onClick={() => setSelectedStatus('open')}
-            className={`px-3 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wide border btn-transition ${
+            className={`px-3.5 py-1.5 rounded-xl text-[10.5px] sm:text-xs md:text-sm font-black uppercase tracking-wider border btn-transition ${
               selectedStatus === 'open' 
-                ? 'bg-zinc-900 border-zinc-950 text-white' 
+                ? 'bg-zinc-900 border-zinc-950 text-white shadow-xs' 
                 : 'bg-transparent border-zinc-200 text-zinc-500 hover:bg-zinc-50'
             }`}
           >
-            Active Issues
+            Active
           </button>
           <button
             onClick={() => setSelectedStatus('closed')}
-            className={`px-3 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wide border btn-transition ${
+            className={`px-3.5 py-1.5 rounded-xl text-[10.5px] sm:text-xs md:text-sm font-black uppercase tracking-wider border btn-transition ${
               selectedStatus === 'closed' 
-                ? 'bg-zinc-900 border-zinc-950 text-white' 
+                ? 'bg-zinc-900 border-zinc-950 text-white shadow-xs' 
                 : 'bg-transparent border-zinc-200 text-zinc-500 hover:bg-zinc-50'
             }`}
           >
-            Closed / Verified
+            Resolved
           </button>
           <button
             onClick={() => setSelectedStatus('all')}
-            className={`px-3 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wide border btn-transition cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl text-[10.5px] sm:text-xs md:text-sm font-black uppercase tracking-wider border btn-transition cursor-pointer ${
               selectedStatus === 'all' 
-                ? 'bg-zinc-900 border-zinc-950 text-white' 
+                ? 'bg-zinc-900 border-zinc-950 text-white shadow-xs' 
                 : 'bg-transparent border-zinc-200 text-zinc-500 hover:bg-zinc-50'
             }`}
           >
             All Logs
           </button>
 
-          <div className="h-6 w-[1px] bg-zinc-150 mx-1 flex-shrink-0" />
+          <div className="h-6 w-[1px] bg-zinc-200 mx-1 flex-shrink-0" />
 
           <button
             onClick={() => setShowOnlyMine(!showOnlyMine)}
-            className={`px-3 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wide border btn-transition flex items-center gap-1 cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl text-[10.5px] sm:text-xs md:text-sm font-black uppercase tracking-wider border btn-transition flex items-center gap-1 cursor-pointer whitespace-nowrap ${
               showOnlyMine 
-                ? 'bg-indigo-600 border-indigo-750 text-white shadow-xs font-black' 
-                : 'bg-transparent border-zinc-200 text-zinc-550 hover:bg-zinc-50'
+                ? 'bg-indigo-600 border-indigo-700 text-white shadow-sm font-black' 
+                : 'bg-transparent border-zinc-200 text-zinc-500 hover:bg-zinc-50'
             }`}
           >
             <span>🙋‍♂️ My Issues</span>
@@ -202,7 +202,7 @@ export default function IssuesPage() {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1 rounded-full text-[10px] font-bold border capitalize whitespace-nowrap btn-transition ${
+              className={`px-3 py-1.5 rounded-full text-[10px] sm:text-xs md:text-sm font-bold border capitalize whitespace-nowrap btn-transition ${
                 selectedCategory === cat 
                   ? 'bg-indigo-600 border-indigo-700 text-white font-extrabold shadow-2xs' 
                   : 'bg-zinc-50 border-zinc-200 text-zinc-500 hover:bg-zinc-100'

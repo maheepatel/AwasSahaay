@@ -28,8 +28,8 @@ export default function RootPage() {
   return (
     <div className="min-h-screen bg-[#090b0f] flex items-center justify-center">
       <div className="flex flex-col items-center gap-3">
-        <div className="w-10 h-10 border-4 border-indigo-650 border-t-transparent rounded-full animate-spin"></div>
-        <span className="text-xs font-bold text-zinc-550 uppercase tracking-widest">Routing Space...</span>
+        <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+        <span className="text-xs font-bold text-zinc-500 uppercase tracking-widest">Routing Space...</span>
       </div>
     </div>
   );

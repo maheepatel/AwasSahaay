@@ -142,7 +142,7 @@ export default function AlertsChannelPage() {
         {!showPostForm && (
           <button
             onClick={() => setShowPostForm(true)}
-            className="flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-2 rounded-xl btn-transition shadow-sm"
+            className="flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-[10.5px] sm:text-xs md:text-sm font-black px-4 py-2.5 rounded-xl btn-transition shadow-sm whitespace-nowrap"
           >
             <Plus className="w-4 h-4" />
             <span>Post Alert</span>
@@ -171,7 +171,7 @@ export default function AlertsChannelPage() {
               <button
                 type="button"
                 onClick={() => setSeverity('info')}
-                className={`flex-1 py-2 text-[10px] font-extrabold uppercase tracking-wider border rounded-xl btn-transition ${
+                className={`flex-1 py-2.5 px-2 text-[10.5px] xs:text-xs font-black uppercase tracking-wider border rounded-xl btn-transition whitespace-nowrap ${
                   severity === 'info' ? 'bg-zinc-100 border-zinc-200 text-zinc-800' : 'bg-white text-zinc-400 border-zinc-200'
                 }`}
               >
@@ -180,8 +180,8 @@ export default function AlertsChannelPage() {
               <button
                 type="button"
                 onClick={() => setSeverity('caution')}
-                className={`flex-1 py-2 text-[10px] font-extrabold uppercase tracking-wider border rounded-xl btn-transition ${
-                  severity === 'caution' ? 'bg-amber-100 border-amber-200 text-amber-700 font-extrabold shadow-2xs' : 'bg-white text-zinc-400 border-zinc-200'
+                className={`flex-1 py-2.5 px-2 text-[10.5px] xs:text-xs font-black uppercase tracking-wider border rounded-xl btn-transition whitespace-nowrap ${
+                  severity === 'caution' ? 'bg-amber-100 border-amber-200 text-amber-700 shadow-2xs' : 'bg-white text-zinc-400 border-zinc-200'
                 }`}
               >
                 🟠 Caution
@@ -189,8 +189,8 @@ export default function AlertsChannelPage() {
               <button
                 type="button"
                 onClick={() => setSeverity('critical')}
-                className={`flex-1 py-2 text-[10px] font-extrabold uppercase tracking-wider border rounded-xl btn-transition ${
-                  severity === 'critical' ? 'bg-rose-500 border-rose-600 text-white font-extrabold shadow-sm' : 'bg-white text-zinc-400 border-zinc-200'
+                className={`flex-1 py-2.5 px-2 text-[10.5px] xs:text-xs font-black uppercase tracking-wider border rounded-xl btn-transition whitespace-nowrap ${
+                  severity === 'critical' ? 'bg-rose-500 border-rose-600 text-white shadow-sm' : 'bg-white text-zinc-400 border-zinc-200'
                 }`}
               >
                 🔴 Critical
@@ -246,7 +246,7 @@ export default function AlertsChannelPage() {
           <button
             type="submit"
             disabled={submitting || uploading}
-            className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 btn-transition shadow-md shadow-indigo-100"
+            className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl text-[11px] sm:text-xs md:text-sm uppercase tracking-wider flex items-center justify-center gap-1.5 btn-transition shadow-sm whitespace-nowrap"
           >
             <span>Broadcast Alert</span>
             <Send className="w-3.5 h-3.5" />
@@ -316,7 +316,7 @@ export default function AlertsChannelPage() {
                     {alert.status === 'active' && (
                       <button
                         onClick={() => handleToggleReact(alert.id)}
-                        className={`flex items-center gap-1 px-1.5 py-0.5 rounded-md border font-extrabold text-[9px] uppercase tracking-wider btn-transition ${
+                        className={`flex items-center gap-1 px-2.5 py-1 rounded-xl border font-black text-[9px] sm:text-[10px] md:text-xs uppercase tracking-wider btn-transition whitespace-nowrap cursor-pointer ${
                           alert.reacts?.includes(currentUser.id)
                             ? 'bg-indigo-50 border-indigo-200 text-indigo-700'
                             : 'bg-zinc-50 border-zinc-200 text-zinc-500 hover:bg-zinc-100'
@@ -329,7 +329,7 @@ export default function AlertsChannelPage() {
                     {alert.status === 'active' && isUserAllowedToResolve(alert) && (
                       <button
                         onClick={() => handleResolveAlert(alert.id)}
-                        className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-extrabold text-[10px] tracking-wider uppercase btn-transition bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-md"
+                        className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-black text-[9.0px] sm:text-[10px] md:text-xs tracking-wider uppercase btn-transition bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-xl whitespace-nowrap cursor-pointer"
                       >
                         <CheckCircle className="w-3.5 h-3.5" />
                         <span>Resolve</span>

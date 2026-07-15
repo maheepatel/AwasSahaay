@@ -72,7 +72,7 @@ export default function WorkersPage() {
             onClick={() => worker.userRaw && handleWorkerClick(worker.userRaw, worker)}
             className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 cursor-pointer btn-transition"
           >
-            <div className="flex items-center gap-3.5 min-w-0">
+            <div className="flex items-center gap-3.5 min-w-0 flex-1">
               {worker.userRaw?.avatar_url ? (
                 <img 
                   src={worker.userRaw.avatar_url} 
@@ -84,15 +84,15 @@ export default function WorkersPage() {
                   {worker.name.charAt(0)}
                 </div>
               )}
-              <div className="min-w-0">
-                <h4 className="text-xs font-bold text-zinc-800 truncate">{worker.name}</h4>
-                <p className="text-[10px] text-indigo-600 font-bold tracking-wide uppercase mt-0.5">
+              <div className="min-w-0 flex-1">
+                <h4 className="text-[11px] sm:text-xs md:text-sm font-bold text-zinc-800 truncate">{worker.name}</h4>
+                <p className="text-[9px] sm:text-[10px] md:text-xs text-indigo-600 font-bold tracking-wide uppercase mt-0.5 truncate">
                   {getWorkerRoleLabel(worker.phone)}
                 </p>
               </div>
             </div>
             
-            <div className="text-[9px] text-zinc-400 font-extrabold uppercase bg-zinc-50 px-2.5 py-1 rounded-lg border border-zinc-100">
+            <div className="text-[8.5px] sm:text-[9.5px] md:text-xs text-zinc-400 font-extrabold uppercase bg-zinc-50 px-2.5 py-1 rounded-lg border border-zinc-100 flex-shrink-0 whitespace-nowrap">
               View Stats
             </div>
           </div>
@@ -167,10 +167,10 @@ export default function WorkersPage() {
                 </div>
 
                 {/* Call / Chat Actions */}
-                <div className="flex gap-2 w-full mt-4 text-[10px] font-black uppercase tracking-wider">
+                <div className="flex gap-2.5 w-full mt-4 text-xs font-black uppercase tracking-wider">
                   <a 
                     href={`tel:${selectedWorker.phone}`}
-                    className="flex-1 py-2.5 border border-zinc-200 hover:bg-zinc-50 rounded-xl flex items-center justify-center gap-1 text-zinc-600 transition"
+                    className="flex-1 py-3 border border-zinc-200 hover:bg-zinc-50 rounded-xl flex items-center justify-center gap-1.5 text-zinc-600 transition whitespace-nowrap"
                   >
                     <Phone className="w-3.5 h-3.5 text-zinc-400" />
                     <span>Call Staff</span>
@@ -180,7 +180,7 @@ export default function WorkersPage() {
                       setSelectedWorker(null);
                       router.push(`/society/${societyId}/general`);
                     }}
-                    className="flex-1 py-2.5 bg-zinc-900 hover:bg-zinc-950 text-white rounded-xl flex items-center justify-center gap-1 transition shadow-sm"
+                    className="flex-1 py-3 bg-zinc-900 hover:bg-zinc-950 text-white rounded-xl flex items-center justify-center gap-1.5 transition shadow-sm whitespace-nowrap"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                     <span>Chat Message</span>

@@ -163,14 +163,14 @@ export default function AdminPanelPage() {
                 <div className="flex gap-2 border-t border-zinc-200/50 pt-2.5">
                   <button
                     onClick={() => handleVerify(mem.id)}
-                    className="flex-1 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1 btn-transition"
+                    className="flex-1 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 btn-transition whitespace-nowrap"
                   >
                     <UserCheck className="w-3.5 h-3.5" />
-                    <span>Approve & Verify</span>
+                    <span>Approve</span>
                   </button>
                   <button
                     onClick={() => handleReject(mem.id)}
-                    className="py-1.5 px-3 bg-zinc-200 hover:bg-rose-50 text-zinc-600 hover:text-rose-600 rounded-lg text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1 btn-transition border border-transparent hover:border-rose-100"
+                    className="py-2 px-4 bg-zinc-100 hover:bg-rose-50 text-zinc-600 hover:text-rose-600 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 btn-transition border border-transparent hover:border-rose-100 whitespace-nowrap"
                   >
                     <UserX className="w-3.5 h-3.5" />
                     <span>Reject</span>
